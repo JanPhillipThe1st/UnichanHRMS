@@ -44,6 +44,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.gbEmployees = new System.Windows.Forms.GroupBox();
+            this.btnLeave = new System.Windows.Forms.Button();
             this.btnEditEmployee = new System.Windows.Forms.Button();
             this.btnClearFilters = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -204,6 +205,7 @@
             // 
             this.gbEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbEmployees.Controls.Add(this.btnLeave);
             this.gbEmployees.Controls.Add(this.btnEditEmployee);
             this.gbEmployees.Controls.Add(this.btnClearFilters);
             this.gbEmployees.Controls.Add(this.label6);
@@ -224,6 +226,19 @@
             this.gbEmployees.TabStop = false;
             this.gbEmployees.Text = "Employees";
             this.gbEmployees.Enter += new System.EventHandler(this.gbEmployees_Enter);
+            // 
+            // btnLeave
+            // 
+            this.btnLeave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLeave.Enabled = false;
+            this.btnLeave.Font = new System.Drawing.Font("Poppins", 10F);
+            this.btnLeave.Location = new System.Drawing.Point(1379, 148);
+            this.btnLeave.Name = "btnLeave";
+            this.btnLeave.Size = new System.Drawing.Size(182, 31);
+            this.btnLeave.TabIndex = 27;
+            this.btnLeave.Text = "Apply for Leave";
+            this.btnLeave.UseVisualStyleBackColor = true;
+            this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
             // 
             // btnEditEmployee
             // 
@@ -369,5 +384,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnClearFilters;
         private System.Windows.Forms.Button btnEditEmployee;
+        private System.Windows.Forms.Button btnLeave;
     }
 }

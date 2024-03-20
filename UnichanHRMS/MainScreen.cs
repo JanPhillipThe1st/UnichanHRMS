@@ -32,7 +32,10 @@ namespace UnichanHRMS
             this.btnManageApplicants.BackColor = utilities.defaultThemePrimaryColor;
             this.btnVisitorsLog.BackColor = utilities.defaultThemePrimaryColor;
             this.btnLogout.BackColor = utilities.defaultThemePrimaryColor;
-            
+            timer1.Start();
+            lblWelcome.Text = Properties.Settings.Default.UserStates;
+
+
 
         }
 
@@ -72,6 +75,11 @@ namespace UnichanHRMS
             panelMain.Controls.Clear();
             panelMain.Controls.Add(form);
             form.Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDateTime.Text = DateTime.Now.ToString("MMMM dd, yyyy HH:mm:ss");
         }
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2024 at 04:34 PM
+-- Generation Time: Mar 19, 2024 at 05:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -50,10 +50,8 @@ CREATE TABLE `applicant` (
 --
 
 INSERT INTO `applicant` (`applicant_ID`, `batch_number`, `first_name`, `middle_name`, `last_name`, `age`, `gender`, `contact`, `birth_date`, `application_date`, `exam_date`, `initial_interview_date`, `final_interview_date`, `application_status`, `remarks`) VALUES
-(24, 1, '', '', '', '', '', '', '2024-03-11 22:34:34', '2024-03-11 22:34:34', '2024-03-11 22:34:34', 'March 11, 2024', 'March 11, 2024', 'hired', ''),
-(25, 1, '', '', '', '', '', '', '2024-03-11 22:35:36', '2024-03-11 22:35:36', '2024-03-11 22:35:36', 'NOT SET', 'NOT SET', 'rejected', ''),
-(26, 1, 'Michael', 'M', 'Jackson', '32', 'Male', '09365665389', '1980-03-11 22:40:30', '2024-03-14 22:40:31', '2024-03-20 22:40:31', 'NOT SET', 'NOT SET', 'rejected', 'Did not pass exam'),
-(27, 1, 'Michael', 'J', 'Jordan', '23', 'Male', '096356231532', '2001-03-05 22:43:50', '2024-03-11 22:43:50', '2024-03-11 22:43:50', 'March 11, 2024', 'March 27, 2024', 'hired', '');
+(29, 1, 'asd', 'asd', 'asd', '25', 'Male', '09635664654', '2000-03-12 08:21:17', '2024-03-12 08:21:17', '2024-03-12 08:21:17', 'March 12, 2024', 'March 12, 2024', 'hired', ''),
+(32, 1, 'John', 'J', 'Kennedy', '26', 'Male', '096356268654', '1998-12-02 22:11:49', '2024-03-19 22:11:49', '2024-03-27 22:11:49', 'March 22, 2024', 'March 28, 2024', 'hired', '');
 
 -- --------------------------------------------------------
 
@@ -83,6 +81,7 @@ INSERT INTO `batch` (`batch_number`, `number_of_applicants`, `number_of_hired_ap
 
 CREATE TABLE `employee` (
   `employee_ID` int(11) NOT NULL,
+  `generated_id` varchar(255) NOT NULL,
   `applicant_ID` int(11) NOT NULL,
   `batch_number` int(11) NOT NULL,
   `sss_number` varchar(255) NOT NULL,
@@ -92,16 +91,29 @@ CREATE TABLE `employee` (
   `orientation_date` datetime NOT NULL DEFAULT current_timestamp(),
   `employment_status` varchar(10) NOT NULL,
   `employment_remarks` varchar(40) NOT NULL,
-  `photo` text NOT NULL
+  `photo` text NOT NULL,
+  `available_leave` int(3) NOT NULL,
+  `leaves_used` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`employee_ID`, `applicant_ID`, `batch_number`, `sss_number`, `philhealth_number`, `pag_ibig_number`, `TIN_number`, `orientation_date`, `employment_status`, `employment_remarks`, `photo`) VALUES
-(14, 24, 1, '   -  -', '  -         -', '    -    -', '   -   -   -', '2024-03-11 22:35:00', 'ACTIVE', 'PASSED ALL EXAMS', ''),
-(15, 27, 1, '555-55-55555', '55-555555555-5', '5555-5555-5555', '555-555-555-555', '2024-03-25 22:45:39', 'ACTIVE', 'PASSED ALL EXAMS', '');
+INSERT INTO `employee` (`employee_ID`, `generated_id`, `applicant_ID`, `batch_number`, `sss_number`, `philhealth_number`, `pag_ibig_number`, `TIN_number`, `orientation_date`, `employment_status`, `employment_remarks`, `photo`, `available_leave`, `leaves_used`) VALUES
+(18, '2024-0', 32, 1, '232-31-54897', '45-623125645-6', '5454-4345-3543', '468-682-111-124', '2023-03-19 22:13:09', 'ACTIVE', 'REGULAR', '', 6, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leave_application`
+--
+
+CREATE TABLE `leave_application` (
+  `leave_ID` int(11) NOT NULL,
+  `employee_ID` int(11) NOT NULL,
+  `leave_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -174,6 +186,12 @@ ALTER TABLE `employee`
   ADD KEY `applicant_ID` (`applicant_ID`);
 
 --
+-- Indexes for table `leave_application`
+--
+ALTER TABLE `leave_application`
+  ADD PRIMARY KEY (`leave_ID`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -193,7 +211,7 @@ ALTER TABLE `visitor`
 -- AUTO_INCREMENT for table `applicant`
 --
 ALTER TABLE `applicant`
-  MODIFY `applicant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `applicant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `batch`
@@ -205,7 +223,13 @@ ALTER TABLE `batch`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employee_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `employee_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `leave_application`
+--
+ALTER TABLE `leave_application`
+  MODIFY `leave_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`

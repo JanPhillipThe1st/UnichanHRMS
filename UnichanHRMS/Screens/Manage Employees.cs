@@ -33,7 +33,7 @@ namespace UnichanHRMS.Screens
             this.panel1.BackColor = utilities.defaultThemePrimaryColor;
             //Populate the data table for employees
             employeeDataTable = database.fillEmployeesTable(ref dgvActiveEmployees,"ACTIVE");
-            database.fillEmployeesTable(ref dgvResignedEmployees,"DESIGNED");
+            database.fillEmployeesTable(ref dgvResignedEmployees,"RESIGNED");
             lblCount.Text = "Current Active Employees: " + dgvActiveEmployees.RowCount;
             if (currentEmployee.employee_ID != 0)
             {
@@ -59,11 +59,13 @@ namespace UnichanHRMS.Screens
 
             cbCriteria.Items.Clear();
             cbCriteria.Items.AddRange(database.getCriteria(filterDictionary[cbFilter.Text]).ToArray());
+            lblCount.Text = "Current Active Employees: " + dgvActiveEmployees.RowCount;
         }
 
         private void cbCriteria_SelectedIndexChanged(object sender, EventArgs e)
         {
             employeeDataTable = database.filterEmployeesTable(ref dgvActiveEmployees, filterDictionary[cbFilter.Text],cbCriteria.Text);
+            lblCount.Text = "Current Active Employees: " + dgvActiveEmployees.RowCount;
         }
 
         private void btnClearFilters_Click(object sender, EventArgs e)
@@ -71,6 +73,7 @@ namespace UnichanHRMS.Screens
 
           employeeDataTable =   database.fillEmployeesTable(ref dgvActiveEmployees, "ACTIVE");
             database.fillEmployeesTable(ref dgvResignedEmployees, "RESIGNED");
+            lblCount.Text = "Current Active Employees: " + dgvActiveEmployees.RowCount;
         }
 
         private void tbSearchEmployee_TextChanged(object sender, EventArgs e)
@@ -91,6 +94,14 @@ namespace UnichanHRMS.Screens
                 applicant = database.getApplicantByID(currentEmployee.applicant_ID.ToString());
                 btnEditEmployee.Enabled = true;
                 btnDelete.Enabled = true;
+            }
+            if (currentEmployee.leaves_remaining < 1)
+            {
+                btnLeave.Enabled = false;
+            }
+            else { 
+            
+                btnLeave.Enabled = true;
             }
 
         }
@@ -115,6 +126,7 @@ namespace UnichanHRMS.Screens
                 database.deleteEmployee(currentEmployee);
                 database.deleteApplicant(applicant);
                 employeeDataTable = database.fillEmployeesTable(ref dgvActiveEmployees,"ACTIVE");
+                lblCount.Text = "Current Active Employees: " + dgvActiveEmployees.RowCount;
             }
         }
 
@@ -144,8 +156,18 @@ namespace UnichanHRMS.Screens
                         database.deleteEmployee(currentEmployee);
                         database.deleteApplicant(applicant);
                         employeeDataTable = database.fillEmployeesTable(ref dgvActiveEmployees, "ACTIVE");
+                        lblCount.Text = "Current Active Employees: " + dgvActiveEmployees.RowCount;
                     }
                 }
+            }
+            if (currentEmployee.leaves_remaining < 1)
+            {
+                btnLeave.Enabled = false;
+            }
+            else
+            {
+
+                btnLeave.Enabled = true;
             }
 
         }
@@ -157,7 +179,26 @@ namespace UnichanHRMS.Screens
 
         private void btnPrintReport_Click(object sender, EventArgs e)
         {
+            new Employee_Report(employeeDataTable).ShowDialog();
+        }
 
+        private void btnLeave_Click(object sender, EventArgs e)
+        {
+            currentEmployee = database.getEmployeeByID(dgvActiveEmployees.SelectedCells[0].Value.ToString());
+            if (currentEmployee.employee_ID != 0)
+            {
+                if (currentEmployee.leaves_remaining < 1)
+                {
+                    MessageBox.Show("Maximum leaves used.");
+                    employeeDataTable = database.fillEmployeesTable(ref dgvActiveEmployees, "ACTIVE");
+                }
+                else
+                {
+
+                    new LeaveApplication(currentEmployee).ShowDialog();
+                }
+
+            }
         }
     }
 }

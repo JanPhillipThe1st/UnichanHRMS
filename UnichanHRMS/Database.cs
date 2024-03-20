@@ -79,7 +79,7 @@ namespace UnichanHRMS
             {
                 this.db.Open();
                 command.Connection = this.db;
-                command.CommandText = "SELECT username, password,ID FROM user WHERE username = @username OR password = @password AND access = 'admin'";
+                command.CommandText = "SELECT username, password,ID, full_name FROM user WHERE username = @username OR password = @password AND access = 'admin'";
                 command.Parameters.AddWithValue("@username", username);
                 command.Parameters.AddWithValue("@password", encryptPassword(password, "yamato"));
                 MySqlDataReader reader = command.ExecuteReader();
@@ -91,8 +91,12 @@ namespace UnichanHRMS
                         if (reader.GetString(0) == username && reader.GetString(1) == encryptPassword(password,"yamato"))
                         {
                             MessageBox.Show("Login Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Properties.Settings.Default.UserStates =reader.GetString("full_name");
+                            Properties.Settings.Default.Save();
                             command.Dispose();
                             this.db.Close();
+
+                            checkForRegulars();
                             return true;
                         }
                         else if (reader.GetString(0) == username && reader.GetString(1) != password)
@@ -261,7 +265,7 @@ namespace UnichanHRMS
                     "`contact` AS 'Contact #', `applicant`.`batch_number` AS 'Batch Number', `sss_number` AS 'SSS Number', " +
                     "`philhealth_number` AS 'PhilHealth Number', `pag_ibig_number` AS 'Pag-ibig Number', `TIN_number` AS " +
                     "'TIN', `orientation_date` AS 'Orientation Date', `employment_status` AS 'Employment Status'," +
-                    " `employment_remarks` AS 'Employment Remarks'  FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
+                    " `employment_remarks` AS 'Employment Remarks'  ,(`available_leave` - `leaves_used`) AS 'Leaves Available' FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
                     " `employee`.`applicant_ID` WHERE `employment_status` = @employment_status;";
                 command.Parameters.AddWithValue("@employment_status", employment_status);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -269,9 +273,22 @@ namespace UnichanHRMS
                 DataTable dataTable = new DataTable();
                
                 dataTable.Load(reader);
-                dataTable1.Load(reader);
                 dgv.DataSource = dataTable;
                 dgv.Columns[0].Visible = false;
+                command.Dispose();
+                this.db.Close();
+            }
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "SELECT  * ,(`available_leave` - `leaves_used`) AS 'Leaves Available' FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
+                    " `employee`.`applicant_ID` WHERE `employment_status` = @employment_status;";
+                command.Parameters.AddWithValue("@employment_status", employment_status);
+                MySqlDataReader reader = command.ExecuteReader();
+
+
+                dataTable1.Load(reader);
                 command.Dispose();
                 this.db.Close();
                 return dataTable1;
@@ -291,15 +308,29 @@ namespace UnichanHRMS
                     "`contact` AS 'Contact #', `applicant`.`batch_number` AS 'Batch Number', `sss_number` AS 'SSS Number', " +
                     "`philhealth_number` AS 'PhilHealth Number', `pag_ibig_number` AS 'Pag-ibig Number', `TIN_number` AS " +
                     "'TIN', `orientation_date` AS 'Orientation Date', `employment_status` AS 'Employment Status'," +
-                    " `employment_remarks` AS 'Employment Remarks'  FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
+                    " `employment_remarks` AS 'Employment Remarks'  ,(`available_leave` - `leaves_used`) AS 'Leaves Available' FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
                     " `employee`.`applicant_ID` WHERE `employee`.`" + filter + "` = @criteria;";
                 command.Parameters.AddWithValue("@criteria", criteria);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 DataTable dataTable = new DataTable();
                 dataTable.Load(reader);
-                data.Load(reader);
                 dgv.DataSource = dataTable;
+
+                command.Dispose();
+                this.db.Close();
+
+            }
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "SELECT *  ,(`available_leave` - `leaves_used`) AS 'Leaves Available' FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
+                    " `employee`.`applicant_ID` WHERE `employee`.`" + filter + "` = @criteria;";
+                command.Parameters.AddWithValue("@criteria", criteria);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                data.Load(reader);
 
                 command.Dispose();
                 this.db.Close();
@@ -319,7 +350,7 @@ namespace UnichanHRMS
                     "`contact` AS 'Contact #', `applicant`.`batch_number` AS 'Batch Number', `sss_number` AS 'SSS Number', " +
                     "`philhealth_number` AS 'PhilHealth Number', `pag_ibig_number` AS 'Pag-ibig Number', `TIN_number` AS " +
                     "'TIN', `orientation_date` AS 'Orientation Date', `employment_status` AS 'Employment Status'," +
-                    " `employment_remarks` AS 'Employment Remarks'  FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
+                    " `employment_remarks` AS 'Employment Remarks'  ,(`available_leave` - `leaves_used`) AS 'Leaves Available' FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
                     " `employee`.`applicant_ID` WHERE `middle_name` LIKE @criteria OR `first_name` LIKE @criteria OR `last_name` LIKE @criteria;";
                 command.Parameters.AddWithValue("@criteria", "%"+name+"%");
                 MySqlDataReader reader = command.ExecuteReader();
@@ -482,8 +513,24 @@ namespace UnichanHRMS
                 MySqlDataReader reader = command.ExecuteReader();
                 DataTable dataTable = new DataTable();
                 dataTable.Load(reader);
-                data .Load(reader);
                 dgv.DataSource = dataTable;
+
+                command.Dispose();
+                this.db.Close();
+            }
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "SELECT `employee_ID` AS 'ID', `batch_number` AS 'Batch Number', `sss_number` AS 'SSS Number', " +
+                    "`philhealth_number` AS 'PhilHealth Number', `pag_ibig_number` AS 'Pag-ibig Number', `TIN_number` AS " +
+                    "'TIN', `orientation_date` AS 'Orientation Date', `employment_status` AS 'Employment Status'," +
+                    " `employment_remarks` AS 'Employment Remarks'  FROM `employee` WHERE batch_number = @batch_number AND `employment_status` = @employment_status";
+                command.Parameters.AddWithValue("@batch_number", batchNumber);
+                command.Parameters.AddWithValue("@employment_status", employment_status);
+                MySqlDataReader reader = command.ExecuteReader();
+                DataTable dataTable = new DataTable();
+                data.Load(reader);
 
                 command.Dispose();
                 this.db.Close();
@@ -922,7 +969,7 @@ namespace UnichanHRMS
             {
                 this.db.Open();
                 command.Connection = this.db;
-                command.CommandText = "SELECT * FROM employee WHERE `employee_ID` = @employee_ID";
+                command.CommandText = "SELECT *,(available_leave - leaves_used) FROM employee WHERE `employee_ID` = @employee_ID";
                 command.Parameters.AddWithValue("@employee_ID", employee_ID);
                 MySqlDataReader reader = command.ExecuteReader();
                 while(reader.Read()){ 
@@ -936,6 +983,9 @@ namespace UnichanHRMS
                 employee.orientation_date = reader.GetDateTime(8);
                 employee.employment_status = reader.GetString(9);
                 employee.employment_remarks = reader.GetString(10);
+                employee.available_leave = reader.GetInt32(12);
+                employee.leaves_used = reader.GetInt32(13);
+                employee.leaves_remaining = reader.GetInt32(14);
                 }
                 reader.Close();
                 command.Dispose();
@@ -1191,6 +1241,22 @@ namespace UnichanHRMS
                 this.db.Close();
             }
         }
+        public void grantLeave(Employee employee)
+        {
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "UPDATE `employee` SET `leaves_used` = (`leaves_used` + 1) WHERE `applicant_ID` = @applicant_ID;";
+                command.Parameters.AddWithValue("@applicant_ID", employee.applicant_ID);
+                command.ExecuteNonQuery();
+
+                MessageBox.Show("Leave granted!", "Success");
+
+                command.Dispose();
+                this.db.Close();
+            }
+        }
         public int getNextEmployeeID()
         {
             int result = 0;
@@ -1261,6 +1327,18 @@ namespace UnichanHRMS
 
                 MessageBox.Show("Applicant information updated successfully!", "Success");
 
+                command.Dispose();
+                this.db.Close();
+            }
+        }
+        public void checkForRegulars()
+        {
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "UPDATE `employee` SET `employment_remarks`='REGULAR',`available_leave` = TIMESTAMPDIFF(MONTH,DATE_ADD(orientation_date, INTERVAL 6 MONTH),CURRENT_DATE()) WHERE DATE_ADD(orientation_date, INTERVAL 6 MONTH) <= CURRENT_DATE;";
+                command.ExecuteNonQuery();
                 command.Dispose();
                 this.db.Close();
             }
