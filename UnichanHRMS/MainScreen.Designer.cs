@@ -36,11 +36,11 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.lblWelcome = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.lblDateTime = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblWelcome = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnVisitorsLog = new UnichanHRMS.CustomControls.RoundedButton();
             this.btnManageApplicants = new UnichanHRMS.CustomControls.RoundedButton();
@@ -49,6 +49,7 @@
             this.panelMenu.SuspendLayout();
             this.panelMenuBottom.SuspendLayout();
             this.panelBanner.SuspendLayout();
+            this.panelMain.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,18 +115,41 @@
             // 
             // panelMain
             // 
+            this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(0)))));
+            this.panelMain.Controls.Add(this.lblWelcome);
+            this.panelMain.Controls.Add(this.label1);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(233, 39);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1427, 705);
             this.panelMain.TabIndex = 1;
             // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Montserrat Medium", 36F, System.Drawing.FontStyle.Bold);
+            this.lblWelcome.Location = new System.Drawing.Point(58, 359);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(69, 66);
+            this.lblWelcome.TabIndex = 0;
+            this.lblWelcome.Text = "**";
+            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Montserrat", 48F);
+            this.label1.Location = new System.Drawing.Point(54, 261);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(356, 88);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Welcome,";
+            // 
             // panelTop
             // 
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(0)))));
             this.panelTop.Controls.Add(this.label2);
             this.panelTop.Controls.Add(this.lblDateTime);
-            this.panelTop.Controls.Add(this.label1);
-            this.panelTop.Controls.Add(this.lblWelcome);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(233, 0);
             this.panelTop.Name = "panelTop";
@@ -150,25 +174,6 @@
             this.lblDateTime.Size = new System.Drawing.Size(24, 22);
             this.lblDateTime.TabIndex = 2;
             this.lblDateTime.Text = "**";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 22);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Welcome,";
-            // 
-            // lblWelcome
-            // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Montserrat Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcome.Location = new System.Drawing.Point(102, 8);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(24, 22);
-            this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "**";
             // 
             // timer1
             // 
@@ -280,6 +285,8 @@
             this.panelMenuBottom.ResumeLayout(false);
             this.panelBanner.ResumeLayout(false);
             this.panelBanner.PerformLayout();
+            this.panelMain.ResumeLayout(false);
+            this.panelMain.PerformLayout();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.ResumeLayout(false);

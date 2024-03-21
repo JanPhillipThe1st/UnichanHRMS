@@ -302,7 +302,7 @@ namespace UnichanHRMS
             {
                 this.db.Open();
                 command.Connection = this.db;
-                command.CommandText = "SELECT `employee_ID` AS 'ID'," +
+                command.CommandText = "SELECT `employee_ID`, `generated_ID` AS 'ID'," +
                     " `first_name` AS 'First Name', `middle_name` AS 'Middle Name', " +
                     "`last_name` AS 'Last Name', `age` AS 'Age', `birth_date` AS 'Birthday', `gender` AS 'Gender', " +
                     "`contact` AS 'Contact #', `applicant`.`batch_number` AS 'Batch Number', `sss_number` AS 'SSS Number', " +
@@ -342,9 +342,9 @@ namespace UnichanHRMS
             List<String> recipientNames = new List<String>();
             using (MySqlCommand command = new MySqlCommand())
             {
-                this.db.Open();
+                checkConnection();
                 command.Connection = this.db;
-                command.CommandText = "SELECT `employee_ID` AS 'ID'," +
+                command.CommandText = "SELECT `employee_ID`,`generated_ID` AS 'ID'," +
                     " `first_name` AS 'First Name', `middle_name` AS 'Middle Name', " +
                     "`last_name` AS 'Last Name', `age` AS 'Age', `birth_date` AS 'Birthday', `gender` AS 'Gender', " +
                     "`contact` AS 'Contact #', `applicant`.`batch_number` AS 'Batch Number', `sss_number` AS 'SSS Number', " +
@@ -1021,7 +1021,7 @@ namespace UnichanHRMS
             {
                 this.db.Open();
                 command.Connection = this.db;
-                command.CommandText = "SELECT `"+filter+"` FROM employee";
+                command.CommandText = "SELECT DISTINCT `"+filter+"` FROM employee";
                 MySqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -1337,7 +1337,8 @@ namespace UnichanHRMS
             {
                 this.db.Open();
                 command.Connection = this.db;
-                command.CommandText = "UPDATE `employee` SET `employment_remarks`='REGULAR',`available_leave` = TIMESTAMPDIFF(MONTH,DATE_ADD(orientation_date, INTERVAL 6 MONTH),CURRENT_DATE()) WHERE DATE_ADD(orientation_date, INTERVAL 6 MONTH) <= CURRENT_DATE;";
+                command.CommandText = "UPDATE `employee` SET `employment_remarks`='REGULAR',`available_leave` = TIMESTAMPDIFF(MONTH,DATE_ADD(orientation_date, INTERVAL 6 MONTH),CURRENT_DATE()) WHERE" +
+                    " DATE_ADD(orientation_date, INTERVAL 6 MONTH) <= CURRENT_DATE;";
                 command.ExecuteNonQuery();
                 command.Dispose();
                 this.db.Close();

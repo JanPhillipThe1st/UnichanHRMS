@@ -173,8 +173,10 @@
             this.dgvActiveEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvActiveEmployees.Size = new System.Drawing.Size(753, 309);
             this.dgvActiveEmployees.TabIndex = 23;
+            this.dgvActiveEmployees.DataSourceChanged += new System.EventHandler(this.dgvActiveEmployees_DataSourceChanged);
             this.dgvActiveEmployees.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActiveEmployees_CellClick);
             this.dgvActiveEmployees.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellContentClick);
+            this.dgvActiveEmployees.VisibleChanged += new System.EventHandler(this.dgvActiveEmployees_VisibleChanged);
             this.dgvActiveEmployees.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvActiveEmployees_KeyDown);
             this.dgvActiveEmployees.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvActiveEmployees_KeyPress);
             // 

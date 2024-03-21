@@ -47,8 +47,8 @@ namespace UnichanHRMS.Screens
             mtbTIN.Text = employee.TIN_number;
             dtpOrientationDate.Value = employee.orientation_date;
 
-            cbEmployeeStatus.Text = employee.employment_remarks;
-            tbEmployeeRemarks.Text = employee.employment_status;
+            cbEmployeeStatus.Text = employee.employment_status;
+            tbEmployeeRemarks.Text = employee.employment_remarks;
 
 
         }
@@ -80,8 +80,8 @@ namespace UnichanHRMS.Screens
             employee.pag_ibig_number = mtbPagIbig.Text;
             employee.TIN_number = mtbTIN.Text;
             employee.orientation_date = dtpOrientationDate.Value;
-            employee.employment_remarks = cbEmployeeStatus.Text;
-            employee.employment_status = tbEmployeeRemarks.Text;
+            employee.employment_remarks = tbEmployeeRemarks.Text;
+            employee.employment_status = cbEmployeeStatus.Text;
 
             if (MessageBox.Show("Are you sure you want to save this information?", "Updating employee information", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2024 at 05:22 PM
+-- Generation Time: Mar 20, 2024 at 07:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -51,7 +51,8 @@ CREATE TABLE `applicant` (
 
 INSERT INTO `applicant` (`applicant_ID`, `batch_number`, `first_name`, `middle_name`, `last_name`, `age`, `gender`, `contact`, `birth_date`, `application_date`, `exam_date`, `initial_interview_date`, `final_interview_date`, `application_status`, `remarks`) VALUES
 (29, 1, 'asd', 'asd', 'asd', '25', 'Male', '09635664654', '2000-03-12 08:21:17', '2024-03-12 08:21:17', '2024-03-12 08:21:17', 'March 12, 2024', 'March 12, 2024', 'hired', ''),
-(32, 1, 'John', 'J', 'Kennedy', '26', 'Male', '096356268654', '1998-12-02 22:11:49', '2024-03-19 22:11:49', '2024-03-27 22:11:49', 'March 22, 2024', 'March 28, 2024', 'hired', '');
+(32, 1, 'John', 'J', 'Kennedy', '26', 'Male', '096356268654', '1998-12-02 22:11:49', '2024-03-19 22:11:49', '2024-03-27 22:11:49', 'March 22, 2024', 'March 28, 2024', 'hired', ''),
+(33, 1, 'Jun', 'B', 'Alain', '20', 'Male', '096356485223', '2024-03-20 14:10:13', '2024-03-20 14:10:13', '2024-03-20 14:10:13', 'March 22, 2024', 'April 03, 2024', 'hired', '');
 
 -- --------------------------------------------------------
 
@@ -101,7 +102,8 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_ID`, `generated_id`, `applicant_ID`, `batch_number`, `sss_number`, `philhealth_number`, `pag_ibig_number`, `TIN_number`, `orientation_date`, `employment_status`, `employment_remarks`, `photo`, `available_leave`, `leaves_used`) VALUES
-(18, '2024-0', 32, 1, '232-31-54897', '45-623125645-6', '5454-4345-3543', '468-682-111-124', '2023-03-19 22:13:09', 'ACTIVE', 'REGULAR', '', 6, 3);
+(18, '2024-0', 32, 1, '232-31-54897', '45-623125645-6', '5454-4345-3543', '468-682-111-124', '2023-03-19 22:13:09', 'ACTIVE', 'REGULAR', '', 6, 3),
+(19, '2024-19', 33, 1, '   -  -', '  -         -', '    -    -', '   -   -   -', '2024-03-20 14:11:10', 'ACTIVE', 'PASSED ALL EXAMS', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -136,7 +138,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID`, `username`, `full_name`, `password`, `address`, `contact`, `access`) VALUES
-(1, 'admin', 'Admin', 'mc3zdI7di6UhxLIrt8M2rQ==', 'Secret', '09222123123', 'admin');
+(1, 'admin', 'Hiring Manager', 'mc3zdI7di6UhxLIrt8M2rQ==', 'Secret', '09222123123', 'admin');
 
 -- --------------------------------------------------------
 
@@ -211,7 +213,7 @@ ALTER TABLE `visitor`
 -- AUTO_INCREMENT for table `applicant`
 --
 ALTER TABLE `applicant`
-  MODIFY `applicant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `applicant_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `batch`
@@ -223,7 +225,7 @@ ALTER TABLE `batch`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employee_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `employee_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `leave_application`

@@ -200,5 +200,39 @@ namespace UnichanHRMS.Screens
 
             }
         }
+
+        private void dgvActiveEmployees_DataSourceChanged(object sender, EventArgs e)
+        {
+
+            foreach (DataGridViewRow row in dgvActiveEmployees.Rows)
+            {
+                DateTime orientation_date = DateTime.Parse(row.Cells[14].Value.ToString());
+                DateTime forward_orientation_date = orientation_date.AddMonths(6);
+                if (DateTime.Now >= forward_orientation_date)
+                {
+                    DataGridViewCellStyle rowCellStyle = row.DefaultCellStyle;
+                    rowCellStyle.BackColor = Color.Red;
+                    rowCellStyle.ForeColor = Color.White;
+                    row.DefaultCellStyle = rowCellStyle;
+                }
+            }
+        }
+
+        private void dgvActiveEmployees_VisibleChanged(object sender, EventArgs e)
+        {
+          
+            foreach (DataGridViewRow row in dgvActiveEmployees.Rows)
+            {
+                DateTime orientation_date = DateTime.Parse(row.Cells[14].Value.ToString());
+                DateTime forward_orientation_date = orientation_date.AddMonths(6);
+                if (DateTime.Now >= forward_orientation_date)
+                {
+                    DataGridViewCellStyle rowCellStyle = row.DefaultCellStyle;
+                    rowCellStyle.BackColor = Color.Red;
+                    rowCellStyle.ForeColor = Color.White;
+                    row.DefaultCellStyle = rowCellStyle;
+                }
+            }
+        }
     }
 }

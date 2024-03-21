@@ -45,6 +45,7 @@ namespace UnichanHRMS.Screens
                 database.updateApplicant(applicant);
 
                 database.addEmployee(employee);
+                database.checkForRegulars();
                 database.fillApplicantsTable(ref dgv);
                 this.Close();
             }
@@ -61,6 +62,26 @@ namespace UnichanHRMS.Screens
             cbBatchNumber.Text = applicant.batch_number.ToString();
             cbBatchNumber.Enabled = false;
 
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to clear all input?","Clear inputs",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+            foreach (Control control in this.Controls)
+            {
+                    if (control is TextBox) {
+                        TextBox textBox = (TextBox)control;
+                        textBox.Clear();
+                    }
+                    if (control is MaskedTextBox)
+                    {
+                        MaskedTextBox textBox = (MaskedTextBox)control;
+                        textBox.Clear();
+                    }
+                }
+                
+            }
         }
     }
 }
