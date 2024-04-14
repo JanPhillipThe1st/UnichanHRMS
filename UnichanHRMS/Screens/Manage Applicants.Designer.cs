@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Manage_Applicants));
             this.dgvApplicants = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tbSearchApplicant = new System.Windows.Forms.TextBox();
-            this.btnSettings = new UnichanHRMS.CustomControls.TabButton();
-            this.btnAddApplicant = new UnichanHRMS.CustomControls.RoundedButton();
             this.btnDelete = new System.Windows.Forms.Button();
             this.cbShowRejected = new System.Windows.Forms.CheckBox();
+            this.btnSMSNotification = new System.Windows.Forms.Button();
+            this.btnSettings = new UnichanHRMS.CustomControls.TabButton();
+            this.btnAddApplicant = new UnichanHRMS.CustomControls.RoundedButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvApplicants)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,20 +47,20 @@
             // 
             this.dgvApplicants.AllowUserToAddRows = false;
             this.dgvApplicants.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvApplicants.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvApplicants.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvApplicants.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvApplicants.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Montserrat", 12F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvApplicants.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Montserrat", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvApplicants.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvApplicants.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvApplicants.EnableHeadersVisualStyles = false;
             this.dgvApplicants.Location = new System.Drawing.Point(17, 154);
@@ -108,6 +109,42 @@
             this.tbSearchApplicant.TabIndex = 27;
             this.tbSearchApplicant.TextChanged += new System.EventHandler(this.tbSearchApplicant_TextChanged);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Font = new System.Drawing.Font("Poppins", 10F);
+            this.btnDelete.Location = new System.Drawing.Point(767, 117);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(182, 31);
+            this.btnDelete.TabIndex = 29;
+            this.btnDelete.Text = "Delete Applicant";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // cbShowRejected
+            // 
+            this.cbShowRejected.AutoSize = true;
+            this.cbShowRejected.Location = new System.Drawing.Point(17, 91);
+            this.cbShowRejected.Name = "cbShowRejected";
+            this.cbShowRejected.Size = new System.Drawing.Size(150, 26);
+            this.cbShowRejected.TabIndex = 30;
+            this.cbShowRejected.Text = "Show Rejected";
+            this.cbShowRejected.UseVisualStyleBackColor = true;
+            this.cbShowRejected.CheckedChanged += new System.EventHandler(this.cbShowRejected_CheckedChanged);
+            // 
+            // btnSMSNotification
+            // 
+            this.btnSMSNotification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSMSNotification.Font = new System.Drawing.Font("Poppins", 10F);
+            this.btnSMSNotification.Location = new System.Drawing.Point(17, 603);
+            this.btnSMSNotification.Name = "btnSMSNotification";
+            this.btnSMSNotification.Size = new System.Drawing.Size(182, 31);
+            this.btnSMSNotification.TabIndex = 31;
+            this.btnSMSNotification.Text = "SMS Notification";
+            this.btnSMSNotification.UseVisualStyleBackColor = true;
+            this.btnSMSNotification.Click += new System.EventHandler(this.btnSMSNotification_Click);
+            // 
             // btnSettings
             // 
             this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -152,35 +189,12 @@
             this.btnAddApplicant.UseVisualStyleBackColor = false;
             this.btnAddApplicant.Click += new System.EventHandler(this.btnAddApplicant_Click);
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Font = new System.Drawing.Font("Poppins", 10F);
-            this.btnDelete.Location = new System.Drawing.Point(767, 117);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(182, 31);
-            this.btnDelete.TabIndex = 29;
-            this.btnDelete.Text = "Delete Applicant";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // cbShowRejected
-            // 
-            this.cbShowRejected.AutoSize = true;
-            this.cbShowRejected.Location = new System.Drawing.Point(17, 91);
-            this.cbShowRejected.Name = "cbShowRejected";
-            this.cbShowRejected.Size = new System.Drawing.Size(150, 26);
-            this.cbShowRejected.TabIndex = 30;
-            this.cbShowRejected.Text = "Show Rejected";
-            this.cbShowRejected.UseVisualStyleBackColor = true;
-            this.cbShowRejected.CheckedChanged += new System.EventHandler(this.cbShowRejected_CheckedChanged);
-            // 
             // Manage_Applicants
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(967, 655);
+            this.Controls.Add(this.btnSMSNotification);
             this.Controls.Add(this.cbShowRejected);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label1);
@@ -210,5 +224,6 @@
         private System.Windows.Forms.TextBox tbSearchApplicant;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.CheckBox cbShowRejected;
+        private System.Windows.Forms.Button btnSMSNotification;
     }
 }

@@ -36,6 +36,7 @@ namespace UnichanHRMS.Screens
             if ( MessageBox.Show("Are you sure you want to add this record?","Add batch number",MessageBoxButtons.YesNo,MessageBoxIcon.Question)  == DialogResult.Yes )
             {
                 database.addBatch(batch);
+                this.Close();
             }
         }
 

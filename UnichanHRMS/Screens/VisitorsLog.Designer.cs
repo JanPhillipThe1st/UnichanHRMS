@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisitorsLog));
             this.dgvVisitorsLog = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.gbAddVisitor = new System.Windows.Forms.GroupBox();
+            this.btnSave = new UnichanHRMS.CustomControls.RoundedButton();
             this.dtpDateOfVisit = new System.Windows.Forms.DateTimePicker();
             this.dtpTimeOut = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
@@ -47,33 +49,30 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDeleteLog = new System.Windows.Forms.Button();
-            this.btnClearFilters = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbCriteria = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cbFilter = new System.Windows.Forms.ComboBox();
-            this.btnSave = new UnichanHRMS.CustomControls.RoundedButton();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVisitorsLog)).BeginInit();
             this.gbAddVisitor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvVisitorsLog
             // 
             this.dgvVisitorsLog.AllowUserToAddRows = false;
             this.dgvVisitorsLog.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvVisitorsLog.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvVisitorsLog.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvVisitorsLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvVisitorsLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Montserrat", 12F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVisitorsLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Montserrat", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVisitorsLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVisitorsLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVisitorsLog.EnableHeadersVisualStyles = false;
             this.dgvVisitorsLog.Location = new System.Drawing.Point(17, 117);
@@ -122,6 +121,27 @@
             this.gbAddVisitor.TabIndex = 24;
             this.gbAddVisitor.TabStop = false;
             this.gbAddVisitor.Text = "NEW VISITOR";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(0)))));
+            this.btnSave.BorderColor = System.Drawing.Color.PaleGoldenrod;
+            this.btnSave.BorderRadius = 40;
+            this.btnSave.BorderSize = 0;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnSave.Location = new System.Drawing.Point(189, 519);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(150, 40);
+            this.btnSave.TabIndex = 6;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // dtpDateOfVisit
             // 
@@ -197,6 +217,8 @@
             // 
             this.tbCompany.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbCompany.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.tbCompany.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.tbCompany.Location = new System.Drawing.Point(27, 137);
             this.tbCompany.Name = "tbCompany";
             this.tbCompany.Size = new System.Drawing.Size(332, 27);
@@ -206,6 +228,8 @@
             // 
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.tbName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.tbName.Location = new System.Drawing.Point(27, 70);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(332, 27);
@@ -250,88 +274,29 @@
             this.btnDeleteLog.TabIndex = 25;
             this.btnDeleteLog.Text = "Delete item";
             this.btnDeleteLog.UseVisualStyleBackColor = true;
+            this.btnDeleteLog.Click += new System.EventHandler(this.btnDeleteLog_Click);
             // 
-            // btnClearFilters
+            // btnPrint
             // 
-            this.btnClearFilters.Font = new System.Drawing.Font("Poppins", 10F);
-            this.btnClearFilters.Location = new System.Drawing.Point(376, 77);
-            this.btnClearFilters.Name = "btnClearFilters";
-            this.btnClearFilters.Size = new System.Drawing.Size(110, 31);
-            this.btnClearFilters.TabIndex = 30;
-            this.btnClearFilters.Text = "Clear filters";
-            this.btnClearFilters.UseVisualStyleBackColor = true;
+            this.btnPrint.Font = new System.Drawing.Font("Montserrat", 10F);
+            this.btnPrint.Location = new System.Drawing.Point(17, 77);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(129, 31);
+            this.btnPrint.TabIndex = 26;
+            this.btnPrint.Text = "Print report";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // label7
+            // errorProvider1
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Poppins", 10F);
-            this.label7.Location = new System.Drawing.Point(12, 83);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(122, 25);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Where equal to:";
-            // 
-            // cbCriteria
-            // 
-            this.cbCriteria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCriteria.Font = new System.Drawing.Font("Poppins", 10F);
-            this.cbCriteria.FormattingEnabled = true;
-            this.cbCriteria.Location = new System.Drawing.Point(140, 80);
-            this.cbCriteria.Name = "cbCriteria";
-            this.cbCriteria.Size = new System.Drawing.Size(230, 31);
-            this.cbCriteria.TabIndex = 28;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Poppins", 10F);
-            this.label8.Location = new System.Drawing.Point(65, 44);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 25);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Filter by:";
-            // 
-            // cbFilter
-            // 
-            this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilter.Font = new System.Drawing.Font("Poppins", 10F);
-            this.cbFilter.FormattingEnabled = true;
-            this.cbFilter.Location = new System.Drawing.Point(140, 43);
-            this.cbFilter.Name = "cbFilter";
-            this.cbFilter.Size = new System.Drawing.Size(230, 31);
-            this.cbFilter.TabIndex = 27;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(0)))));
-            this.btnSave.BorderColor = System.Drawing.Color.PaleGoldenrod;
-            this.btnSave.BorderRadius = 40;
-            this.btnSave.BorderSize = 0;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnSave.Location = new System.Drawing.Point(189, 519);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(150, 40);
-            this.btnSave.TabIndex = 6;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.errorProvider1.ContainerControl = this;
             // 
             // VisitorsLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1535, 655);
-            this.Controls.Add(this.btnClearFilters);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.cbCriteria);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.cbFilter);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnDeleteLog);
             this.Controls.Add(this.gbAddVisitor);
             this.Controls.Add(this.label5);
@@ -345,6 +310,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvVisitorsLog)).EndInit();
             this.gbAddVisitor.ResumeLayout(false);
             this.gbAddVisitor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -368,10 +334,7 @@
         private System.Windows.Forms.Label label6;
         private CustomControls.RoundedButton btnSave;
         private System.Windows.Forms.Button btnDeleteLog;
-        private System.Windows.Forms.Button btnClearFilters;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cbCriteria;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cbFilter;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

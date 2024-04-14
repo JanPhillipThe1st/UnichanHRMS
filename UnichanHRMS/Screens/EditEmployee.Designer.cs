@@ -70,6 +70,8 @@
             this.tbEmployeeRemarks = new System.Windows.Forms.TextBox();
             this.dtpBirthdate = new System.Windows.Forms.DateTimePicker();
             this.label19 = new System.Windows.Forms.Label();
+            this.dtpResignationDate = new System.Windows.Forms.DateTimePicker();
+            this.lblResignationDate = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -376,6 +378,7 @@
             this.cbEmployeeStatus.Name = "cbEmployeeStatus";
             this.cbEmployeeStatus.Size = new System.Drawing.Size(353, 30);
             this.cbEmployeeStatus.TabIndex = 72;
+            this.cbEmployeeStatus.SelectedIndexChanged += new System.EventHandler(this.cbEmployeeStatus_SelectedIndexChanged);
             // 
             // label12
             // 
@@ -473,12 +476,34 @@
             this.label19.TabIndex = 81;
             this.label19.Text = "Birth Date";
             // 
+            // dtpResignationDate
+            // 
+            this.dtpResignationDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpResignationDate.Location = new System.Drawing.Point(811, 389);
+            this.dtpResignationDate.Name = "dtpResignationDate";
+            this.dtpResignationDate.Size = new System.Drawing.Size(353, 27);
+            this.dtpResignationDate.TabIndex = 82;
+            this.dtpResignationDate.Visible = false;
+            // 
+            // lblResignationDate
+            // 
+            this.lblResignationDate.AutoSize = true;
+            this.lblResignationDate.Font = new System.Drawing.Font("Montserrat", 12F);
+            this.lblResignationDate.Location = new System.Drawing.Point(807, 361);
+            this.lblResignationDate.Name = "lblResignationDate";
+            this.lblResignationDate.Size = new System.Drawing.Size(148, 22);
+            this.lblResignationDate.TabIndex = 83;
+            this.lblResignationDate.Text = "Resignation Date";
+            this.lblResignationDate.Visible = false;
+            // 
             // EditEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1273, 686);
+            this.Controls.Add(this.dtpResignationDate);
+            this.Controls.Add(this.lblResignationDate);
             this.Controls.Add(this.dtpBirthdate);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.tbEmployeeRemarks);
@@ -574,5 +599,7 @@
         private System.Windows.Forms.TextBox tbEmployeeRemarks;
         private System.Windows.Forms.DateTimePicker dtpBirthdate;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DateTimePicker dtpResignationDate;
+        private System.Windows.Forms.Label lblResignationDate;
     }
 }

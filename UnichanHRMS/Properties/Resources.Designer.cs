@@ -63,6 +63,16 @@ namespace UnichanHRMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _33547226_6600_10_08 {
+            get {
+                object obj = ResourceManager.GetObject("33547226_6600_10_08", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap accept {
             get {
                 object obj = ResourceManager.GetObject("accept", resourceCulture);

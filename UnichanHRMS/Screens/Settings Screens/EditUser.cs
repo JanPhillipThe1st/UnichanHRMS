@@ -36,7 +36,6 @@ namespace UnichanHRMS.Screens
             user.username = tbUsername.Text;
             user.address = tbAddress.Text;
             user.contact = tbContact.Text;
-            user.access = "hiring_manager";
             user.password = database.encryptPassword(tbConfirmPassword.Text,"yamato");
             user.fullName = tbFullName.Text;
             if (tbConfirmPassword.Text != tbPassword.Text)

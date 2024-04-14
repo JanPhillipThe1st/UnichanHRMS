@@ -129,6 +129,12 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserState.cs" />
     <Compile Include="Models\Visitor.cs" />
+    <Compile Include="Reporting\VisitorsLogReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\VisitorsLogReport.Designer.cs">
+      <DependentUpon>VisitorsLogReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\EmployeeDataset.cs">
       <DependentUpon>EmployeeDataset.xsd</DependentUpon>
     </Compile>
@@ -157,6 +163,12 @@
     <Compile Include="Reporting\Employee Report.Designer.cs">
       <DependentUpon>Employee Report.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\BatchNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\BatchNotification.Designer.cs">
+      <DependentUpon>BatchNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\RejectApplicant.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +180,18 @@
     </Compile>
     <Compile Include="Screens\LeaveApplication.Designer.cs">
       <DependentUpon>LeaveApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\SendMessageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\SendMessageDialog.Designer.cs">
+      <DependentUpon>SendMessageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Settings Screens\AddHiringManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Settings Screens\AddHiringManager.Designer.cs">
+      <DependentUpon>AddHiringManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\Settings Screens\EditUser.cs">
       <SubType>Form</SubType>
@@ -265,7 +289,11 @@
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\VisitorsLogReport.resx">
+      <DependentUpon>VisitorsLogReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporting\EmployeeReport.rdlc" />
+    <EmbeddedResource Include="Reporting\VisitorsLogReport.rdlc" />
     <EmbeddedResource Include="RoundedButton.resx">
       <DependentUpon>RoundedButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,11 +313,20 @@
     <EmbeddedResource Include="Reporting\Employee Report.resx">
       <DependentUpon>Employee Report.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Screens\BatchNotification.resx">
+      <DependentUpon>BatchNotification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Screens\RejectApplicant.resx">
       <DependentUpon>RejectApplicant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\LeaveApplication.resx">
       <DependentUpon>LeaveApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\SendMessageDialog.resx">
+      <DependentUpon>SendMessageDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Settings Screens\AddHiringManager.resx">
+      <DependentUpon>AddHiringManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\Settings Screens\EditUser.resx">
       <DependentUpon>EditUser.cs</DependentUpon>
@@ -416,6 +453,7 @@
     <None Include="Resources\cross.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\33547226_6600_10_08.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

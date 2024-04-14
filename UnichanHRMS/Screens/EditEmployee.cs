@@ -18,11 +18,13 @@ namespace UnichanHRMS.Screens
         DateTime final_inverview_date = DateTime.Now;
         DateTime initial_interview_date = DateTime.Now;
         DataGridView dgv = new DataGridView();
-        public EditEmployee(ref DataGridView dgv,Employee employee)
+        DataGridView dgvResigned = new DataGridView();
+        public EditEmployee(ref DataGridView dgv, ref DataGridView dgvResigned, Employee employee)
         {
             InitializeComponent();
             this.employee = employee;
             this.dgv = dgv;
+            this.dgvResigned = dgvResigned;
             this.applicant = database.getApplicantByID(employee.applicant_ID.ToString());
         }
         private void AddApplicant_Load(object sender, EventArgs e)
@@ -82,12 +84,14 @@ namespace UnichanHRMS.Screens
             employee.orientation_date = dtpOrientationDate.Value;
             employee.employment_remarks = tbEmployeeRemarks.Text;
             employee.employment_status = cbEmployeeStatus.Text;
+            employee.resignation_date = dtpResignationDate.Value;
 
             if (MessageBox.Show("Are you sure you want to save this information?", "Updating employee information", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 database.updateApplicant(applicant);
                 database.updateEmployee(employee);
                 database.fillEmployeesTable(ref dgv, "ACTIVE");
+                database.fillEmployeesTable(ref dgvResigned, "RESIGNED");
                 this.Close();
             }
         }
@@ -123,6 +127,21 @@ namespace UnichanHRMS.Screens
         private void btnHire_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void cbEmployeeStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbEmployeeStatus.SelectedIndex == 1)
+            {
+                tbEmployeeRemarks.Text = "RESIGNED";
+                lblResignationDate.Visible = true;
+                dtpResignationDate.Visible = true;
+            }
+            else {
+                tbEmployeeRemarks.Text = "ACTIVE";
+                lblResignationDate.Visible = false;
+                dtpResignationDate.Visible = false;
+            }
         }
     }
 }

@@ -79,7 +79,7 @@ namespace UnichanHRMS
             {
                 this.db.Open();
                 command.Connection = this.db;
-                command.CommandText = "SELECT username, password,ID, full_name FROM user WHERE username = @username OR password = @password AND access = 'admin'";
+                command.CommandText = "SELECT username, password,ID, full_name,access FROM user WHERE username = @username OR password = @password AND access = 'admin'";
                 command.Parameters.AddWithValue("@username", username);
                 command.Parameters.AddWithValue("@password", encryptPassword(password, "yamato"));
                 MySqlDataReader reader = command.ExecuteReader();
@@ -92,6 +92,7 @@ namespace UnichanHRMS
                         {
                             MessageBox.Show("Login Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Properties.Settings.Default.UserStates =reader.GetString("full_name");
+                            Properties.Settings.Default.UserType = reader.GetString("access");
                             Properties.Settings.Default.Save();
                             command.Dispose();
                             this.db.Close();
@@ -120,8 +121,7 @@ namespace UnichanHRMS
                 }
                 else
                 {
-                    MessageBox.Show("User does not exist");
-                    result = false;
+                    result = hrLogin(username,password);
 
                 }
 
@@ -137,7 +137,7 @@ namespace UnichanHRMS
             {
                 this.db.Open();
                 command.Connection = this.db;
-                command.CommandText = "SELECT username, password,ID FROM user WHERE username = @username OR password = @password AND access = 'hiring_manager'";
+                command.CommandText = "SELECT username, password,ID,access FROM user WHERE username = @username OR password = @password AND access = 'hiring_assistant'";
                 command.Parameters.AddWithValue("@username", username);
                 command.Parameters.AddWithValue("@password", encryptPassword(password,"yamato"));
                 MySqlDataReader reader = command.ExecuteReader();
@@ -149,6 +149,8 @@ namespace UnichanHRMS
                         if (reader.GetString(0) == username && reader.GetString(1) == password)
                         {
                             MessageBox.Show("Login Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Properties.Settings.Default.UserType = reader.GetString("access");
+                            Properties.Settings.Default.Save();
                             command.Dispose();
                             this.db.Close();
                             return true;
@@ -267,6 +269,17 @@ namespace UnichanHRMS
                     "'TIN', `orientation_date` AS 'Orientation Date', `employment_status` AS 'Employment Status'," +
                     " `employment_remarks` AS 'Employment Remarks'  ,(`available_leave` - `leaves_used`) AS 'Leaves Available' FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
                     " `employee`.`applicant_ID` WHERE `employment_status` = @employment_status;";
+                if (employment_status == "RESIGNED")
+                {
+                    command.CommandText = "SELECT  `employee_ID`, `generated_ID` AS 'ID'," +
+                    " `first_name` AS 'First Name', `middle_name` AS 'Middle Name', " +
+                    "`last_name` AS 'Last Name', `age` AS 'Age', `birth_date` AS 'Birthday', `gender` AS 'Gender', " +
+                    "`contact` AS 'Contact #', `applicant`.`batch_number` AS 'Batch Number', `sss_number` AS 'SSS Number', " +
+                    "`philhealth_number` AS 'PhilHealth Number', `pag_ibig_number` AS 'Pag-ibig Number', `TIN_number` AS " +
+                    "'TIN', `orientation_date` AS 'Orientation Date', `employment_status` AS 'Employment Status',`resignation_date` AS 'Resignation Date', " +
+                    " `employment_remarks` AS 'Employment Remarks'  ,(`available_leave` - `leaves_used`) AS 'Leaves Available' FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
+                    " `employee`.`applicant_ID` WHERE `employment_status` = @employment_status;";
+                }
                 command.Parameters.AddWithValue("@employment_status", employment_status);
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -351,7 +364,7 @@ namespace UnichanHRMS
                     "`philhealth_number` AS 'PhilHealth Number', `pag_ibig_number` AS 'Pag-ibig Number', `TIN_number` AS " +
                     "'TIN', `orientation_date` AS 'Orientation Date', `employment_status` AS 'Employment Status'," +
                     " `employment_remarks` AS 'Employment Remarks'  ,(`available_leave` - `leaves_used`) AS 'Leaves Available' FROM `employee` INNER JOIN `applicant` ON `applicant`.`applicant_ID` = " +
-                    " `employee`.`applicant_ID` WHERE `middle_name` LIKE @criteria OR `first_name` LIKE @criteria OR `last_name` LIKE @criteria;";
+                    " `employee`.`applicant_ID` WHERE `middle_name` LIKE @criteria OR `first_name` LIKE @criteria OR `last_name` LIKE @criteria AND `employment_status` = 'ACTIVE';";
                 command.Parameters.AddWithValue("@criteria", "%"+name+"%");
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -407,9 +420,9 @@ namespace UnichanHRMS
                 return recipientNames;
             }
         }
-        public List<String> fillApplicantsTable(ref DataGridView dgv)
+        public DataTable fillApplicantsTable(ref DataGridView dgv)
         {
-            List<String> recipientNames = new List<String>();
+            DataTable result = new DataTable();
             using (MySqlCommand command = new MySqlCommand())
             {
                 this.db.Open();
@@ -425,9 +438,10 @@ namespace UnichanHRMS
                 DataTable dataTable = new DataTable();
                 dataTable.Load(reader);
                 dgv.DataSource = dataTable;
+                result = dataTable;
                 command.Dispose();
                 this.db.Close();
-                return recipientNames;
+                return result;
             }
         }
 
@@ -452,9 +466,10 @@ namespace UnichanHRMS
                 return recipientNames;
             }
         }
-        public List<String> fillVisitorsTable(ref DataGridView dgv)
+
+        public DataTable fillVisitorsTable(ref DataGridView dgv)
         {
-            List<String> recipientNames = new List<String>();
+            DataTable result = new DataTable();
             using (MySqlCommand command = new MySqlCommand())
             {
                 this.db.Open();
@@ -469,7 +484,57 @@ namespace UnichanHRMS
                 dgv.Columns[0].Visible = false;
                 command.Dispose();
                 this.db.Close();
-                return recipientNames;
+            }
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "SELECT * FROM `visitor`;";
+                MySqlDataReader reader = command.ExecuteReader();
+
+                result.Load(reader);
+                command.Dispose();
+                this.db.Close();
+                return result;
+            }
+        }
+
+        public DataTable fillVisitorsTable(DateTime from, DateTime to)
+        {
+            DataTable result = new DataTable();
+      
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "SELECT * FROM `visitor` WHERE (`time_in` BETWEEN @from AND @to);";
+                command.Parameters.AddWithValue("@from",from);
+                command.Parameters.AddWithValue("@to",to);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                result.Load(reader);
+                command.Dispose();
+                this.db.Close();
+                return result;
+            }
+        }
+        public Dictionary<String,String> getVisitors()
+        {
+            Dictionary< String,String > result = new Dictionary< String,String > ();
+
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "SELECT * FROM `visitor`;";
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(reader.GetString(1),reader.GetString(2));
+                }
+                command.Dispose();
+                this.db.Close();
+                return result;
             }
         }
         public List<String> filterApplicantsTable(ref DataGridView dgv,String searchTerm)
@@ -902,7 +967,7 @@ namespace UnichanHRMS
             {
                 this.db.Open();
                 command.Connection = this.db;
-                command.CommandText = "SELECT * FROM user  WHERE ID = @id AND `access` = 'hiring_manager'";
+                command.CommandText = "SELECT * FROM user  WHERE ID = @id;";
                 command.Parameters.AddWithValue("@id", id);
                 MySqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -911,6 +976,33 @@ namespace UnichanHRMS
                     {
                         user.username = reader.GetString("username");
                         user.password = decryptPassword(reader.GetString("password"),"yamato");
+                        user.fullName = reader.GetString("full_name");
+                        user.address = reader.GetString("address");
+                        user.contact = reader.GetString("contact");
+                        user.access = reader.GetString("access");
+                        user.id = reader.GetInt32("ID");
+                    }
+                }
+                command.Dispose();
+                this.db.Close();
+                return user;
+            }
+        }
+        public User getAdmin()
+        {
+            User user = new User();
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "SELECT * FROM user  WHERE  `access` = 'admin'";
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        user.username = reader.GetString("username");
+                        user.password = decryptPassword(reader.GetString("password"), "yamato");
                         user.fullName = reader.GetString("full_name");
                         user.address = reader.GetString("address");
                         user.contact = reader.GetString("contact");
@@ -1184,6 +1276,29 @@ namespace UnichanHRMS
                 this.db.Close();
             }
         }
+
+        public void updateAdmin(User user)
+        {
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "UPDATE `user` SET `username` =  @username, `full_name` = @full_name, `password` = @password," +
+                    " `address` = @address, `contact` =  @contact WHERE `access` = 'admin' AND `ID` = @ID";
+                command.Parameters.AddWithValue("@username", user.username);
+                command.Parameters.AddWithValue("@full_name", user.fullName);
+                command.Parameters.AddWithValue("@password", user.password);
+                command.Parameters.AddWithValue("@address", user.address);
+                command.Parameters.AddWithValue("@contact", user.contact);
+                command.Parameters.AddWithValue("@ID", user.id);
+                command.ExecuteNonQuery();
+
+                MessageBox.Show("User udpated successfully!", "Success");
+
+                command.Dispose();
+                this.db.Close();
+            }
+        }
         public void addEmployee(Employee employee)
         {
             using (MySqlCommand command = new MySqlCommand())
@@ -1222,7 +1337,7 @@ namespace UnichanHRMS
                 command.Connection = this.db;
                 command.CommandText = "UPDATE `employee` SET  `batch_number` = @batch_number, `sss_number` = @sss_number," +
                     " `philhealth_number` = @philhealth_number, `pag_ibig_number` = @pag_ibig_number, `TIN_number` =  @TIN_number," +
-                    " `orientation_date` =  @orientation_date, `employment_status` = @employment_status, `employment_remarks` = @employment_remarks" +
+                    " `orientation_date` =  @orientation_date, `employment_status` = @employment_status, `employment_remarks` = @employment_remarks, `resignation_date` = @resignation_date" +
                     " WHERE applicant_ID = @applicant_ID;";
                 command.Parameters.AddWithValue("@applicant_ID", employee.applicant_ID);
                 command.Parameters.AddWithValue("@batch_number", employee.batch_number);
@@ -1233,6 +1348,7 @@ namespace UnichanHRMS
                 command.Parameters.AddWithValue("@orientation_date", employee.orientation_date);
                 command.Parameters.AddWithValue("@employment_status", employee.employment_status);
                 command.Parameters.AddWithValue("@employment_remarks", employee.employment_remarks);
+                command.Parameters.AddWithValue("@resignation_date", employee.resignation_date);
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("Employee data updated!", "Success");
@@ -1355,6 +1471,22 @@ namespace UnichanHRMS
                 command.ExecuteNonQuery();
 
                 MessageBox.Show("Applicant information deleted successfully!", "Success");
+
+                command.Dispose();
+                this.db.Close();
+            }
+        }
+        public void deleteLog(String ID)
+        {
+            using (MySqlCommand command = new MySqlCommand())
+            {
+                this.db.Open();
+                command.Connection = this.db;
+                command.CommandText = "DELETE FROM `visitor` WHERE visitor_ID = @ID";
+                command.Parameters.AddWithValue("@ID", ID);
+                command.ExecuteNonQuery();
+
+                MessageBox.Show("Information deleted successfully!", "Success");
 
                 command.Dispose();
                 this.db.Close();

@@ -52,16 +52,17 @@
             this.dtpFinalInterviewDate = new System.Windows.Forms.Label();
             this.dtpBirthdate = new System.Windows.Forms.DateTimePicker();
             this.label12 = new System.Windows.Forms.Label();
+            this.cbGender = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblRemarks = new System.Windows.Forms.Label();
+            this.tbRemarks = new System.Windows.Forms.TextBox();
             this.roundedButton1 = new UnichanHRMS.CustomControls.RoundedButton();
             this.btnHire = new UnichanHRMS.CustomControls.RoundedButton();
             this.btnScheduleInitiralInterview = new UnichanHRMS.CustomControls.RoundedButton();
             this.btnScheduleFinalinterview = new UnichanHRMS.CustomControls.RoundedButton();
             this.btnClear = new UnichanHRMS.CustomControls.RoundedButton();
             this.btnSave = new UnichanHRMS.CustomControls.RoundedButton();
-            this.cbGender = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lblRemarks = new System.Windows.Forms.Label();
-            this.tbRemarks = new System.Windows.Forms.TextBox();
+            this.btnRequirementBriefing = new UnichanHRMS.CustomControls.RoundedButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -283,6 +284,46 @@
             this.label12.TabIndex = 63;
             this.label12.Text = "Birth Date";
             // 
+            // cbGender
+            // 
+            this.cbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbGender.FormattingEnabled = true;
+            this.cbGender.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.cbGender.Location = new System.Drawing.Point(48, 398);
+            this.cbGender.Name = "cbGender";
+            this.cbGender.Size = new System.Drawing.Size(353, 30);
+            this.cbGender.TabIndex = 66;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Montserrat", 12F);
+            this.label13.Location = new System.Drawing.Point(44, 373);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(70, 22);
+            this.label13.TabIndex = 65;
+            this.label13.Text = "Gender";
+            // 
+            // lblRemarks
+            // 
+            this.lblRemarks.AutoSize = true;
+            this.lblRemarks.Font = new System.Drawing.Font("Montserrat", 12F);
+            this.lblRemarks.Location = new System.Drawing.Point(44, 436);
+            this.lblRemarks.Name = "lblRemarks";
+            this.lblRemarks.Size = new System.Drawing.Size(85, 22);
+            this.lblRemarks.TabIndex = 68;
+            this.lblRemarks.Text = "Remarks:";
+            // 
+            // tbRemarks
+            // 
+            this.tbRemarks.Location = new System.Drawing.Point(48, 461);
+            this.tbRemarks.Multiline = true;
+            this.tbRemarks.Name = "tbRemarks";
+            this.tbRemarks.Size = new System.Drawing.Size(353, 96);
+            this.tbRemarks.TabIndex = 69;
+            // 
             // roundedButton1
             // 
             this.roundedButton1.BackColor = System.Drawing.Color.Transparent;
@@ -334,12 +375,12 @@
             this.btnScheduleInitiralInterview.FlatAppearance.BorderSize = 0;
             this.btnScheduleInitiralInterview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnScheduleInitiralInterview.Font = new System.Drawing.Font("Poppins Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnScheduleInitiralInterview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(0)))));
+            this.btnScheduleInitiralInterview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnScheduleInitiralInterview.Image = ((System.Drawing.Image)(resources.GetObject("btnScheduleInitiralInterview.Image")));
             this.btnScheduleInitiralInterview.ImageSize = new System.Drawing.Size(30, 30);
             this.btnScheduleInitiralInterview.Location = new System.Drawing.Point(48, 579);
             this.btnScheduleInitiralInterview.Name = "btnScheduleInitiralInterview";
-            this.btnScheduleInitiralInterview.Size = new System.Drawing.Size(244, 38);
+            this.btnScheduleInitiralInterview.Size = new System.Drawing.Size(314, 38);
             this.btnScheduleInitiralInterview.TabIndex = 60;
             this.btnScheduleInitiralInterview.Text = "SCHEDULE INITIAL INTERVIEW";
             this.btnScheduleInitiralInterview.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -355,12 +396,12 @@
             this.btnScheduleFinalinterview.FlatAppearance.BorderSize = 0;
             this.btnScheduleFinalinterview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnScheduleFinalinterview.Font = new System.Drawing.Font("Poppins Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnScheduleFinalinterview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(0)))));
+            this.btnScheduleFinalinterview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnScheduleFinalinterview.Image = ((System.Drawing.Image)(resources.GetObject("btnScheduleFinalinterview.Image")));
             this.btnScheduleFinalinterview.ImageSize = new System.Drawing.Size(30, 30);
             this.btnScheduleFinalinterview.Location = new System.Drawing.Point(48, 623);
             this.btnScheduleFinalinterview.Name = "btnScheduleFinalinterview";
-            this.btnScheduleFinalinterview.Size = new System.Drawing.Size(244, 38);
+            this.btnScheduleFinalinterview.Size = new System.Drawing.Size(314, 38);
             this.btnScheduleFinalinterview.TabIndex = 59;
             this.btnScheduleFinalinterview.Text = "SCHEDULE FINAL INTERVIEW";
             this.btnScheduleFinalinterview.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -407,52 +448,33 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // cbGender
+            // btnRequirementBriefing
             // 
-            this.cbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbGender.FormattingEnabled = true;
-            this.cbGender.Items.AddRange(new object[] {
-            "Male",
-            "Female"});
-            this.cbGender.Location = new System.Drawing.Point(48, 398);
-            this.cbGender.Name = "cbGender";
-            this.cbGender.Size = new System.Drawing.Size(353, 30);
-            this.cbGender.TabIndex = 66;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Montserrat", 12F);
-            this.label13.Location = new System.Drawing.Point(44, 373);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(70, 22);
-            this.label13.TabIndex = 65;
-            this.label13.Text = "Gender";
-            // 
-            // lblRemarks
-            // 
-            this.lblRemarks.AutoSize = true;
-            this.lblRemarks.Font = new System.Drawing.Font("Montserrat", 12F);
-            this.lblRemarks.Location = new System.Drawing.Point(44, 436);
-            this.lblRemarks.Name = "lblRemarks";
-            this.lblRemarks.Size = new System.Drawing.Size(85, 22);
-            this.lblRemarks.TabIndex = 68;
-            this.lblRemarks.Text = "Remarks:";
-            // 
-            // tbRemarks
-            // 
-            this.tbRemarks.Location = new System.Drawing.Point(48, 461);
-            this.tbRemarks.Multiline = true;
-            this.tbRemarks.Name = "tbRemarks";
-            this.tbRemarks.Size = new System.Drawing.Size(353, 96);
-            this.tbRemarks.TabIndex = 69;
+            this.btnRequirementBriefing.BackColor = System.Drawing.Color.Transparent;
+            this.btnRequirementBriefing.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(0)))));
+            this.btnRequirementBriefing.BorderRadius = 40;
+            this.btnRequirementBriefing.BorderSize = 2;
+            this.btnRequirementBriefing.FlatAppearance.BorderSize = 0;
+            this.btnRequirementBriefing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRequirementBriefing.Font = new System.Drawing.Font("Poppins Medium", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRequirementBriefing.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnRequirementBriefing.Image = ((System.Drawing.Image)(resources.GetObject("btnRequirementBriefing.Image")));
+            this.btnRequirementBriefing.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnRequirementBriefing.Location = new System.Drawing.Point(48, 666);
+            this.btnRequirementBriefing.Name = "btnRequirementBriefing";
+            this.btnRequirementBriefing.Size = new System.Drawing.Size(314, 38);
+            this.btnRequirementBriefing.TabIndex = 59;
+            this.btnRequirementBriefing.Text = "SCHEDULE REQUIREMENTS BRIEFING";
+            this.btnRequirementBriefing.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnRequirementBriefing.UseVisualStyleBackColor = false;
+            this.btnRequirementBriefing.Click += new System.EventHandler(this.btnRequirementBriefing_Click);
             // 
             // EditApplicant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(828, 673);
+            this.ClientSize = new System.Drawing.Size(828, 716);
             this.Controls.Add(this.tbRemarks);
             this.Controls.Add(this.lblRemarks);
             this.Controls.Add(this.cbGender);
@@ -462,6 +484,7 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.btnHire);
             this.Controls.Add(this.btnScheduleInitiralInterview);
+            this.Controls.Add(this.btnRequirementBriefing);
             this.Controls.Add(this.btnScheduleFinalinterview);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSave);
@@ -532,5 +555,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lblRemarks;
         private System.Windows.Forms.TextBox tbRemarks;
+        private CustomControls.RoundedButton btnRequirementBriefing;
     }
 }

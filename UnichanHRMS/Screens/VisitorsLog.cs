@@ -16,6 +16,7 @@ namespace UnichanHRMS.Screens
         Utilities utilities = new Utilities();
         Visitor visitor = new Visitor();
         Database database = new Database();
+        DataTable dataTable = new DataTable();
 
         public VisitorsLog()
         {
@@ -25,7 +26,13 @@ namespace UnichanHRMS.Screens
 
         private void Manage_Employees_Load(object sender, EventArgs e)
         {
-            database.fillVisitorsTable(ref dgvVisitorsLog);
+           dataTable =  database.fillVisitorsTable(ref dgvVisitorsLog);
+            AutoCompleteStringCollection companySource = new AutoCompleteStringCollection();
+            AutoCompleteStringCollection nameSource = new AutoCompleteStringCollection();
+            companySource.AddRange(database.getVisitors().Values.ToArray());
+            nameSource.AddRange(database.getVisitors().Keys.ToArray());
+            tbName.AutoCompleteCustomSource = nameSource;
+            tbCompany.AutoCompleteCustomSource = companySource;
         }
 
         private void dgvEmployees_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -51,6 +58,24 @@ namespace UnichanHRMS.Screens
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            bool notFilled = false;
+            if (tbPurpose.Text.Length <= 0)
+            {
+                errorProvider1.SetError(tbPurpose, "Please fill in this field");
+                notFilled = true;
+            }
+            if (tbCompany.Text.Length <= 0)
+            {
+                errorProvider1.SetError(tbCompany, "Please fill in this field");
+                notFilled = true;
+            }
+            if (tbName.Text.Length <= 0)
+            {
+                errorProvider1.SetError(tbName, "Please fill in this field");
+                notFilled = true;
+            }
+            if (!notFilled)
+            {
             visitor.name = tbName.Text;
             visitor.purpose = tbPurpose.Text;
             visitor.company = tbCompany.Text;
@@ -59,9 +84,24 @@ namespace UnichanHRMS.Screens
             visitor.date_of_visit = dtpDateOfVisit.Value;
             if(MessageBox.Show("Are you sure you want to add this information?","Adding visitor entry",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes){
                 database.addVisitor(visitor);
-                database.fillVisitorsTable(ref dgvVisitorsLog);
+                dataTable = database.fillVisitorsTable(ref dgvVisitorsLog);
+            }
             }
 
+        }
+
+        private void btnDeleteLog_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to delete this item?","Delete log",MessageBoxButtons.YesNo,MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                database.deleteLog(dgvVisitorsLog.SelectedCells[0].Value.ToString());
+                dataTable = database.fillVisitorsTable(ref dgvVisitorsLog);
+            }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            new VisitorsLogReport(dataTable).ShowDialog();
         }
     }
 }

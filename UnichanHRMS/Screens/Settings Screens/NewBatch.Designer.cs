@@ -39,10 +39,11 @@
             this.dtpHiringdate = new System.Windows.Forms.DateTimePicker();
             this.btnClear = new UnichanHRMS.CustomControls.RoundedButton();
             this.btnSave = new UnichanHRMS.CustomControls.RoundedButton();
-            this.tbBatchNumber = new System.Windows.Forms.MaskedTextBox();
             this.tbApplicants = new System.Windows.Forms.MaskedTextBox();
             this.tbHiredApplicants = new System.Windows.Forms.MaskedTextBox();
+            this.tbBatchNumber = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbBatchNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // label5
@@ -173,15 +174,6 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // tbBatchNumber
-            // 
-            this.tbBatchNumber.BeepOnError = true;
-            this.tbBatchNumber.Location = new System.Drawing.Point(54, 143);
-            this.tbBatchNumber.Mask = "00000000000000";
-            this.tbBatchNumber.Name = "tbBatchNumber";
-            this.tbBatchNumber.Size = new System.Drawing.Size(517, 27);
-            this.tbBatchNumber.TabIndex = 49;
-            // 
             // tbApplicants
             // 
             this.tbApplicants.BeepOnError = true;
@@ -200,15 +192,27 @@
             this.tbHiredApplicants.Size = new System.Drawing.Size(517, 27);
             this.tbHiredApplicants.TabIndex = 51;
             // 
+            // tbBatchNumber
+            // 
+            this.tbBatchNumber.Location = new System.Drawing.Point(54, 152);
+            this.tbBatchNumber.Maximum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            0});
+            this.tbBatchNumber.Name = "tbBatchNumber";
+            this.tbBatchNumber.Size = new System.Drawing.Size(517, 27);
+            this.tbBatchNumber.TabIndex = 52;
+            // 
             // NewBatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(621, 449);
+            this.Controls.Add(this.tbBatchNumber);
             this.Controls.Add(this.tbHiredApplicants);
             this.Controls.Add(this.tbApplicants);
-            this.Controls.Add(this.tbBatchNumber);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dtpHiringdate);
@@ -226,6 +230,7 @@
             this.Validated += new System.EventHandler(this.NewBatch_Validated);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbBatchNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,8 +248,8 @@
         private System.Windows.Forms.DateTimePicker dtpHiringdate;
         private CustomControls.RoundedButton btnSave;
         private CustomControls.RoundedButton btnClear;
-        private System.Windows.Forms.MaskedTextBox tbBatchNumber;
         private System.Windows.Forms.MaskedTextBox tbApplicants;
         private System.Windows.Forms.MaskedTextBox tbHiredApplicants;
+        private System.Windows.Forms.NumericUpDown tbBatchNumber;
     }
 }

@@ -83,7 +83,7 @@ namespace UnichanHRMS.Screens
 
         private void btnEditEmployee_Click(object sender, EventArgs e)
         {
-            new EditEmployee(ref dgvActiveEmployees,currentEmployee).ShowDialog();
+            new EditEmployee(ref dgvActiveEmployees,ref dgvResignedEmployees,currentEmployee).ShowDialog();
         }
 
         private void dgvActiveEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -147,7 +147,7 @@ namespace UnichanHRMS.Screens
                 btnDelete.Enabled = true;
                 if (e.KeyCode == Keys.E || e.KeyCode == Keys.Enter)
                 {
-                    new EditEmployee(ref dgvActiveEmployees, currentEmployee).ShowDialog();
+                    new EditEmployee(ref dgvActiveEmployees,ref dgvResignedEmployees, currentEmployee).ShowDialog();
                 }
                 else if (e.KeyCode == Keys.D) {
                     applicant = database.getApplicantByID(currentEmployee.applicant_ID.ToString());

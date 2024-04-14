@@ -80,7 +80,9 @@
             // 
             // dtpApplicationDate
             // 
+            this.dtpApplicationDate.CustomFormat = "MMMM dd, yyyy HH:mm:ss";
             this.dtpApplicationDate.Font = new System.Drawing.Font("Montserrat", 12F);
+            this.dtpApplicationDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpApplicationDate.Location = new System.Drawing.Point(99, 80);
             this.dtpApplicationDate.Name = "dtpApplicationDate";
             this.dtpApplicationDate.Size = new System.Drawing.Size(354, 27);

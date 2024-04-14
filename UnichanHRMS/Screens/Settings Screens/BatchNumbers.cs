@@ -25,7 +25,7 @@ namespace UnichanHRMS.Screens.Settings_Screens
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            new NewBatch(ref dgvBatchList).Show();
+            new NewBatch(ref dgvBatchList).ShowDialog();
         }
     }
 }

@@ -30,6 +30,11 @@ namespace UnichanHRMS.Screens
 
         private void btnUserManagement_Click(object sender, EventArgs e)
         {
+            if (Properties.Settings.Default.UserType != "admin")
+            {
+                MessageBox.Show("You are not allowed to access this setting.");
+                return;
+            }
             Form panelForm = new UserManagement();
             panelForm.Dock = DockStyle.Fill;
             panelForm.TopLevel = false;

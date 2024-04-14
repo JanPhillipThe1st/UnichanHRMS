@@ -28,62 +28,71 @@ namespace UnichanHRMS.Screens
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // applicant.final_interview_date = dtpFinalInterviewDate.Value.ToString("MMMM dd, yyyy");
-            // applicant.initial_interview_date = dtpInitialInterviewDate.Value.ToString("MMMM dd, yyyy");
-
-            foreach (Control control in this.Controls) {
-                if (control is TextBox)
-                {
-                    TextBox textBox = (TextBox)control;
-                    if (textBox.Text.Length <= 0)
-                    {
-                        errorProvider1.SetError(textBox, "Please fill in this field");
-                        return;
-                    }
-                    else {
-                        errorProvider1.Clear();
-                    }
-                }
-                if (control is ComboBox)
-                {
-                    ComboBox comboBox = (ComboBox)control;
-                    if (comboBox.Text.Length <= 0)
-                    {
-                        errorProvider1.SetError(comboBox, "Please choose an item.");
-                        return;
-                    }
-                    else
-                    {
-                        errorProvider1.Clear();
-                    }
-                }
-            }
-
-            applicant.final_interview_date = "NOT SET";
-            applicant.initial_interview_date = "NOT SET";
-            applicant.exam_date = dtpExamDate.Value;
-
-
-           applicant.application_date = dtpApplicationDate.Value;
-           applicant.contact = tbContact.Text;
-           applicant.gender = cbGender.Text;
-           applicant.age = tbAge.Text;
-            applicant.birth_date = dtpBirthdate.Value;
-           applicant.last_name = tbLastName.Text;
-           applicant.middle_name = tbMiddleName.Text;
-           applicant.application_status = "pending";
-           applicant.first_name = tbFirstname.Text;
-           applicant.batch_number = Convert.ToInt32(cbBatchNumber.Text);
-
-
-
-            if (MessageBox.Show("Are you sure you want to save this information?","Adding new applicant",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+            bool notFilled = false;
+        
+            if (cbGender.Text.Length <= 0)
             {
-            database.addApplicant(applicant);
-                database.fillApplicantsTable(ref dataGridView);
-                this.Close();
+                errorProvider1.SetError(cbGender, "Please choose an item.");
+                notFilled = true;
             }
-        }
+            if (cbBatchNumber.Text.Length <= 0)
+            {
+                errorProvider1.SetError(cbBatchNumber, "Please choose an item.");
+                notFilled = true;
+            }
+            if (tbContact.Text.Length <= 0)
+            {
+                errorProvider1.SetError(tbContact, "Please fill in this field");
+                notFilled = true;
+            }
+            if (tbAge.Text.Length <= 0)
+            {
+                errorProvider1.SetError(tbAge, "Please fill in this field");
+                notFilled = true;
+            }
+            if (tbLastName.Text.Length <= 0)
+            {
+                errorProvider1.SetError(tbLastName, "Please fill in this field");
+                notFilled = true;
+            }
+            if (tbMiddleName.Text.Length <= 0)
+            {
+                errorProvider1.SetError(tbMiddleName, "Please fill in this field");
+                notFilled = true;
+            }
+            if (tbFirstname.Text.Length <= 0)
+            {
+                errorProvider1.SetError(tbFirstname, "Please fill in this field");
+                notFilled = true;
+            }
+            if (!notFilled)
+            {
+                
+                applicant.final_interview_date = "NOT SET";
+                applicant.initial_interview_date = "NOT SET";
+                applicant.exam_date = dtpExamDate.Value;
+
+
+               applicant.application_date = dtpApplicationDate.Value;
+               applicant.contact = tbContact.Text;
+               applicant.gender = cbGender.Text;
+               applicant.age = tbAge.Text;
+               applicant.birth_date = dtpBirthdate.Value;
+               applicant.last_name = tbLastName.Text;
+               applicant.middle_name = tbMiddleName.Text;
+               applicant.application_status = "pending";
+               applicant.first_name = tbFirstname.Text;
+               applicant.batch_number = Convert.ToInt32(cbBatchNumber.Text);
+
+
+                if (MessageBox.Show("Are you sure you want to save this information?","Adding new applicant",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                database.addApplicant(applicant);
+                    database.fillApplicantsTable(ref dataGridView);
+                    this.Close();
+                }
+            }
+            }
 
         private void AddApplicant_Load(object sender, EventArgs e)
         {
@@ -109,6 +118,20 @@ namespace UnichanHRMS.Screens
                 }
 
             }
+        }
+
+        private void dtpBirthdate_ValueChanged(object sender, EventArgs e)
+        {
+            // Save today's date.
+            var today = DateTime.Today;
+
+            // Calculate the age.
+            var age = today.Year - dtpBirthdate.Value.Year;
+
+            // Go back to the year in which the person was born in case of a leap year
+            if (dtpBirthdate.Value.Date > today.AddYears(-age)) age--;
+
+            tbAge.Text = age.ToString();
         }
     }
 }

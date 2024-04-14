@@ -92,5 +92,10 @@ namespace UnichanHRMS.Screens
                 database.fillApplicantsTable(ref dgvApplicants);
             }
         }
+
+        private void btnSMSNotification_Click(object sender, EventArgs e)
+        {
+            new BatchNotification().ShowDialog();
+        }
     }
 }

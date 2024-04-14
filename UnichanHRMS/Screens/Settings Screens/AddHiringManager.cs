@@ -11,17 +11,15 @@ using UnichanHRMS.Models;
 
 namespace UnichanHRMS.Screens
 {
-    public partial class AddUsers : Form
+    public partial class AddHiringManager : Form
     {
         Database database = new Database();
         User user = new User();
         DataGridView dataGridView = new DataGridView();
-        String userType = "";
-        public AddUsers(ref DataGridView dataGridView, String userType)
+        public AddHiringManager(ref DataGridView dataGridView)
         {
             InitializeComponent();
             this.dataGridView = dataGridView;
-            this.userType = userType;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -46,7 +44,7 @@ namespace UnichanHRMS.Screens
             user.username = tbUsername.Text;
             user.address = tbAddress.Text;
             user.contact = tbContact.Text;
-            user.access = userType;
+            user.access = "admin";
             user.password = database.encryptPassword(tbConfirmPassword.Text,"yamato");
             user.fullName = tbFirstname.Text + " " + tbMiddleName.Text + " " + tbLastName.Text+ " ";
             if (tbConfirmPassword.Text != tbPassword.Text)
@@ -57,12 +55,7 @@ namespace UnichanHRMS.Screens
                     if (MessageBox.Show("Are you sure you want to save this information?","Adding new user",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                     database.addUser(user);
-                    database.fillUsersTable(ref dataGridView,"hiring_assistant");
-                    if (userType == "hiring_manager")
-                    {
-                    database.fillUsersTable(ref dataGridView,"hiring_manager");
-                        
-                    }
+                        database.fillUsersTable(ref dataGridView, "admin");
                     this.Close();
                     }
             }

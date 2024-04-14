@@ -19,6 +19,7 @@ namespace UnichanHRMS
         public DateTime orientation_date { get; set; }
         public String employment_status { get; set; }
         public String employment_remarks { get; set; }
+        public DateTime resignation_date { get; set; }
         public int available_leave { get; set; }
         public int leaves_used { get; set; }
         public int leaves_remaining { get; set; }

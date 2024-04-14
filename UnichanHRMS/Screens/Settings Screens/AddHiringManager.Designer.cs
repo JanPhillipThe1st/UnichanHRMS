@@ -1,6 +1,6 @@
 ﻿namespace UnichanHRMS.Screens
 {
-    partial class AddUsers
+    partial class AddHiringManager
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddUsers));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddHiringManager));
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
@@ -62,11 +62,11 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Montserrat SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(285, 14);
+            this.label5.Location = new System.Drawing.Point(288, 14);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(274, 29);
+            this.label5.Size = new System.Drawing.Size(268, 29);
             this.label5.TabIndex = 0;
-            this.label5.Text = "ADD HIRING ASSISTANT";
+            this.label5.Text = "ADD HIRING MANAGER";
             // 
             // panel1
             // 
@@ -297,7 +297,7 @@
             this.pbPasswordStrength.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.pbPasswordStrength.TabIndex = 43;
             // 
-            // AddUsers
+            // AddHiringManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -326,7 +326,7 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Montserrat", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "AddUsers";
+            this.Name = "AddHiringManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddEmployee";
             this.Load += new System.EventHandler(this.AddApplicant_Load);
